@@ -37,7 +37,7 @@ public class InvoiceController {
 	public ResponseEntity<Invoice> createInvoice(@RequestBody Invoice invoice){
 		try {
 			Invoice _invoice = invoiceDAO.save(
-					new Invoice(invoice.getInvoiceFrom(),
+					new Invoice(invoice.getCreatedBy(),invoice.getInvoiceFrom(),
 							invoice.getInvoiceTo(),invoice.getAddress(),
 							invoice.getDueDate(),invoice.getIssueDate(),
 							invoice.getTaxAmtPercentage(),invoice.getTaxAmtValue(),
@@ -87,6 +87,7 @@ public class InvoiceController {
 		
 		if(invoiceData.isPresent()) {
 			Invoice _invoice = invoiceData.get();
+			_invoice.setCreatedBy(invoice.getCreatedBy());
 			_invoice.setInvoiceFrom(invoice.getInvoiceFrom());
 			_invoice.setInvoiceTo(invoice.getInvoiceTo());
 			_invoice.setAddress(invoice.getAddress());

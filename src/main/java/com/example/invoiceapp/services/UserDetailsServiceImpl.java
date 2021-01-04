@@ -1,5 +1,6 @@
 package com.example.invoiceapp.services;
 
+
 import java.util.Collections;
 
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,14 +22,17 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		User user = userDAO.findByUsername(username);
-		if (user == null) {
+		final User tUser = userDAO.findByEmail(username);
+		if (tUser == null) {
 			throw new UsernameNotFoundException(username);
 		}
 
-		org.springframework.security.core.userdetails.User springUser = new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), Collections.emptyList());
-		return springUser;
-
+		
+//		org.springframework.security.core.userdetails.User springUser = new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), Collections.emptyList());
+//		return springUser;
+		
+		UserDetails user = org.springframework.security.core.userdetails.User.withUsername(tUser.getEmail()).password(tUser.getPassword()).authorities(Collections.emptyList()).build();
+		return user;
 	}
 
 }

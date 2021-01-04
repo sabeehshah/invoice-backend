@@ -27,6 +27,10 @@ public class Invoice {
 	
 	@Getter
 	@Setter
+	private String createdBy;
+	
+	@Getter
+	@Setter
 	private String invoiceFrom;
 	
 	@Getter
@@ -36,6 +40,7 @@ public class Invoice {
 	@Getter
 	@Setter
 	private String address;
+	
 	
 	@Getter
 	@Setter
@@ -59,9 +64,18 @@ public class Invoice {
 	@Setter
 	private BigDecimal totalAmtDue;
 	
-	public Invoice(String invoiceFrom, String invoiceTo, String address, Date dueDate, Date issueDate,
+	
+
+	@Getter
+	@Setter
+	private List<LineItem> lineItems;
+
+
+
+	public Invoice(String createdBy, String invoiceFrom, String invoiceTo, String address, Date dueDate, Date issueDate,
 			int taxAmtPercentage, BigDecimal taxAmtValue, BigDecimal totalAmtDue, List<LineItem> lineItems) {
 		super();
+		this.createdBy = createdBy;
 		this.invoiceFrom = invoiceFrom;
 		this.invoiceTo = invoiceTo;
 		this.address = address;
@@ -72,10 +86,6 @@ public class Invoice {
 		this.totalAmtDue = totalAmtDue;
 		this.lineItems = lineItems;
 	}
-
-	@Getter
-	@Setter
-	private List<LineItem> lineItems;
 	
 	
 }
