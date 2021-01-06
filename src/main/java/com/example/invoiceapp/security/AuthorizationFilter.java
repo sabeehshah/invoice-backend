@@ -8,6 +8,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import static com.example.invoiceapp.security.SecurityConstants.SECRET;
+import static com.example.invoiceapp.security.SecurityConstants.TOKEN_PREFIX;
+
+
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -42,8 +46,8 @@ public class AuthorizationFilter extends BasicAuthenticationFilter {
 		
 		String token = request.getHeader("Authorization");
 		if(token != null) {
-			String user = Jwts.parser().setSigningKey("SecretKeyToGenJWTs".getBytes())
-					.parseClaimsJws(token.replace("Bearer", ""))
+			String user = Jwts.parser().setSigningKey(SECRET.getBytes())
+					.parseClaimsJws(token.replace(TOKEN_PREFIX, ""))
 					.getBody()
 					.getSubject();
 			
