@@ -66,7 +66,7 @@ public class InvoiceController {
 		}
 	}
 	
-	@GetMapping("/invoices/{createdBy}")
+	@GetMapping("/invoices/createdBy")
 	public ResponseEntity<List<Invoice>> getInvoicesCreatedBy(@RequestParam(value="createdBy") String createdBy){
 		try {
 			List<Invoice> invoices = new ArrayList<Invoice>();
@@ -78,6 +78,7 @@ public class InvoiceController {
 			}
 			
 			log.info(invoices.toString());
+			log.info("hitting createdBy endpoint");
 			return new ResponseEntity<>(invoices,HttpStatus.OK);
 
 			
