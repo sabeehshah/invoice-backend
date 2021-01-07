@@ -12,6 +12,7 @@ public interface InvoiceRepository extends MongoRepository <Invoice, String> {
 	public List<Invoice> findAll();
 	public Optional<Invoice> findById(String id);
 	public void deleteById(String id);
+	public List<Invoice> findByCreatedBy(String createdBy);
 	 
 	
 }

@@ -66,6 +66,27 @@ public class InvoiceController {
 		}
 	}
 	
+	@GetMapping("/invoices/{createdBy}")
+	public ResponseEntity<List<Invoice>> getInvoicesCreatedBy(@RequestParam(value="createdBy") String createdBy){
+		try {
+			List<Invoice> invoices = new ArrayList<Invoice>();
+			
+			invoiceDAO.findByCreatedBy(createdBy).forEach(invoices::add);
+			
+			if(invoices.isEmpty()) {
+				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+			}
+			
+			log.info(invoices.toString());
+			return new ResponseEntity<>(invoices,HttpStatus.OK);
+
+			
+		}catch(Exception e) {
+			return new ResponseEntity<>(null,HttpStatus.INTERNAL_SERVER_ERROR);
+
+		}
+	}
+	
 	@GetMapping("/invoices/{id}")
 	public ResponseEntity<Invoice> getInvoiceById(
 			@PathVariable("id") String id){

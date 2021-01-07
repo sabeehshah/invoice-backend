@@ -32,5 +32,9 @@ public class InvoiceDAO {
 		invoiceRepository.deleteById(id);
 	}
 	
+	public List<Invoice> findByCreatedBy(String createdBy){
+		return invoiceRepository.findByCreatedBy(createdBy);
+	}
+	
 	
 }
