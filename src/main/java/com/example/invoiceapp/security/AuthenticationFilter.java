@@ -1,8 +1,6 @@
 package com.example.invoiceapp.security;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 
@@ -23,17 +21,13 @@ import org.springframework.security.authentication.LockedException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.example.invoiceapp.model.User;
-import com.fasterxml.jackson.core.JsonParser.Feature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
-
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-
+import lombok.extern.slf4j.Slf4j;
 public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
 	private AuthenticationManager authenticationManager;
@@ -54,6 +48,7 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 //			objectMapper.configure(Feature.AUTO_CLOSE_SOURCE,true);
 			
 			User creds = new ObjectMapper().readValue(request.getInputStream(), User.class);
+			System.out.print(creds.toString());
 			return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(creds.getUsername(),
 					creds.getPassword(), Collections.emptyList()));
 		} catch (IOException e) {
