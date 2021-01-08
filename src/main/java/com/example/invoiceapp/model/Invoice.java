@@ -62,7 +62,7 @@ public class Invoice {
 	
 	@Getter
 	@Setter
-	private BigDecimal totalAmtDue;
+	private BigDecimal total;
 	
 	
 
@@ -83,7 +83,7 @@ public class Invoice {
 		this.issueDate = issueDate;
 		this.taxAmtPercentage = taxAmtPercentage;
 		this.taxAmtValue = taxAmtValue;
-		this.totalAmtDue = totalAmtDue;
+		this.total = totalAmtDue;
 		this.lineItems = lineItems;
 	}
 	

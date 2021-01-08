@@ -41,7 +41,7 @@ public class InvoiceController {
 							invoice.getInvoiceTo(),invoice.getAddress(),
 							invoice.getDueDate(),invoice.getIssueDate(),
 							invoice.getTaxAmtPercentage(),invoice.getTaxAmtValue(),
-							invoice.getTotalAmtDue(),invoice.getLineItems()));	
+							invoice.getTotal(),invoice.getLineItems()));	
 			return new ResponseEntity<>(_invoice,HttpStatus.CREATED);
 		}catch(Exception e) {
 			return new ResponseEntity<>(null,HttpStatus.INTERNAL_SERVER_ERROR);
@@ -116,7 +116,7 @@ public class InvoiceController {
 			_invoice.setIssueDate(invoice.getIssueDate());
 			_invoice.setTaxAmtPercentage(invoice.getTaxAmtPercentage());
 			_invoice.setTaxAmtValue(invoice.getTaxAmtValue());
-			_invoice.setTotalAmtDue(invoice.getTotalAmtDue());
+			_invoice.setTotal(invoice.getTotal());
 			_invoice.setLineItems(invoice.getLineItems());
 			
 			return new ResponseEntity<>(invoiceDAO.save(_invoice),HttpStatus.OK);
