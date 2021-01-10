@@ -37,10 +37,18 @@ public class Invoice {
 	@Setter
 	private String invoiceTo;
 	
+	
 	@Getter
 	@Setter
-	private String address;
+	private String companyPhone;
 	
+	@Getter
+	@Setter
+	private Address companyAddress;
+	
+	@Getter
+	@Setter
+	private Address billingAddress;
 	
 	@Getter
 	@Setter
@@ -72,13 +80,15 @@ public class Invoice {
 
 
 
-	public Invoice(String createdBy, String invoiceFrom, String invoiceTo, String address, Date dueDate, Date issueDate,
+	public Invoice(String createdBy, String invoiceFrom, String invoiceTo, String companyPhone,Address companyAddress, Address billingAddress, Date dueDate, Date issueDate,
 			int taxAmtPercentage, BigDecimal taxAmtValue, BigDecimal totalAmtDue, List<LineItem> lineItems) {
 		super();
 		this.createdBy = createdBy;
 		this.invoiceFrom = invoiceFrom;
 		this.invoiceTo = invoiceTo;
-		this.address = address;
+		this.companyPhone = companyPhone;
+		this.companyAddress = companyAddress;
+		this.billingAddress = billingAddress;
 		this.dueDate = dueDate;
 		this.issueDate = issueDate;
 		this.taxAmtPercentage = taxAmtPercentage;

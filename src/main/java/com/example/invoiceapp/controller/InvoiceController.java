@@ -38,7 +38,7 @@ public class InvoiceController {
 		try {
 			Invoice _invoice = invoiceDAO.save(
 					new Invoice(invoice.getCreatedBy(),invoice.getInvoiceFrom(),
-							invoice.getInvoiceTo(),invoice.getAddress(),
+							invoice.getInvoiceTo(),invoice.getCompanyPhone(),invoice.getCompanyAddress(),invoice.getBillingAddress(),
 							invoice.getDueDate(),invoice.getIssueDate(),
 							invoice.getTaxAmtPercentage(),invoice.getTaxAmtValue(),
 							invoice.getTotal(),invoice.getLineItems()));	
@@ -111,7 +111,9 @@ public class InvoiceController {
 			_invoice.setCreatedBy(invoice.getCreatedBy());
 			_invoice.setInvoiceFrom(invoice.getInvoiceFrom());
 			_invoice.setInvoiceTo(invoice.getInvoiceTo());
-			_invoice.setAddress(invoice.getAddress());
+			_invoice.setCompanyPhone(invoice.getCompanyPhone());
+			_invoice.setCompanyAddress(invoice.getCompanyAddress());
+			_invoice.setBillingAddress(invoice.getBillingAddress());
 			_invoice.setDueDate(invoice.getDueDate());
 			_invoice.setIssueDate(invoice.getIssueDate());
 			_invoice.setTaxAmtPercentage(invoice.getTaxAmtPercentage());
