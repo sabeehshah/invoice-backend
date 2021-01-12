@@ -44,20 +44,20 @@ public class Invoice {
 	
 	@Getter
 	@Setter
-	private Address companyAddress;
+	private String companyAddress;
 	
 	@Getter
 	@Setter
-	private Address billingAddress;
+	private String billingAddress;
 	
 	@Getter
 	@Setter
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
 	private Date dueDate;
 	
 	@Getter
 	@Setter
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
 	private Date issueDate;
 	
 	@Getter
@@ -80,7 +80,7 @@ public class Invoice {
 
 
 
-	public Invoice(String createdBy, String invoiceFrom, String invoiceTo, String companyPhone,Address companyAddress, Address billingAddress, Date dueDate, Date issueDate,
+	public Invoice(String createdBy, String invoiceFrom, String invoiceTo, String companyPhone,String companyAddress, String billingAddress, Date dueDate, Date issueDate,
 			int taxAmtPercentage, BigDecimal taxAmtValue, BigDecimal totalAmtDue, List<LineItem> lineItems) {
 		super();
 		this.createdBy = createdBy;
