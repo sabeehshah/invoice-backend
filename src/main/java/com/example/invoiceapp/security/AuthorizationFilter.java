@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import static com.example.invoiceapp.security.SecurityConstants.SECRET;
 import static com.example.invoiceapp.security.SecurityConstants.TOKEN_PREFIX;
 
-
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -20,49 +19,48 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 import io.jsonwebtoken.Jwts;
 
 public class AuthorizationFilter extends BasicAuthenticationFilter {
-	
+
 	public AuthorizationFilter(AuthenticationManager authenticationManager) {
 		super(authenticationManager);
 	}
-	
+
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws IOException, ServletException {
 		// TODO Auto-generated method stub
-		
+
 		String header = request.getHeader("Authorization");
-		if(header == null || !header.startsWith("Bearer"))
-		{
+		if (header == null || !header.startsWith("Bearer")) {
 			filterChain.doFilter(request, response);
 			return;
 		}
-		
+
 		UsernamePasswordAuthenticationToken authenticationToken = getAuthentication(request);
 		SecurityContextHolder.getContext().setAuthentication(authenticationToken);
 		filterChain.doFilter(request, response);
+
+		if (request.getMethod().equals("OPTIONS")) {
+			response.setStatus(HttpServletResponse.SC_OK);
+			return;
+		}
 	}
 
 	private UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest request) {
-		
+
 		String token = request.getHeader("Authorization");
-		if(token != null) {
-			String user = Jwts.parser().setSigningKey(SECRET.getBytes())
-					.parseClaimsJws(token.replace(TOKEN_PREFIX, ""))
-					.getBody()
-					.getSubject();
-			
-			if(user != null) {
+		if (token != null) {
+			String user = Jwts.parser().setSigningKey(SECRET.getBytes()).parseClaimsJws(token.replace(TOKEN_PREFIX, ""))
+					.getBody().getSubject();
+
+			if (user != null) {
 				return new UsernamePasswordAuthenticationToken(user, null, new ArrayList<>());
 			}
-			
+
 			return null;
 		}
-		
+
 		return null;
-				
-		
+
 	}
-	
-	
-	
+
 }
