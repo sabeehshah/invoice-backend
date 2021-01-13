@@ -49,15 +49,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	CorsConfigurationSource configurationSource() {
 		
 		CorsConfiguration configuration = new CorsConfiguration();
-		configuration.setAllowedOrigins(Arrays.asList("*"));
+		configuration.setAllowedOrigins(Arrays.asList("https://invoice-backend-heroku.herokuapp.com"));
 	    configuration.setAllowedMethods(Arrays.asList("HEAD", "GET", "PUT", "POST", "DELETE", "PATCH", "OPTIONS"));
 	    configuration.setAllowCredentials(true);
-//	    configuration.addAllowedOrigin("*");
-//	    configuration.addAllowedHeader("*");
-//	    configuration.addAllowedMethod("*");
+	    configuration.setAllowedHeaders(Arrays.asList("Authorization","Cache-Control", "Content-Type"));
+
 		
 		final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-		source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
+		source.registerCorsConfiguration("/**", configuration);
 		return source;
 	}
 	
